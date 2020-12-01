@@ -26,6 +26,16 @@ public class Ecommerce {
         this.orders = orders;
     }
 
+    public Item asItem(String item) {
+        List <Item> items = products.stream()
+                .filter( product -> product.getName().equals(item))
+                .collect(Collectors.toList());
+        if (items.isEmpty()) {
+            return null;
+        }
+        return items.get(0);
+    }
+
     public static Ecommerce transform(String ecommerceString) {
         String [] str = ecommerceString.split(";");
         return (new Ecommerce(
@@ -70,5 +80,20 @@ public class Ecommerce {
     public String toString() {
         return "Ecommerce { " + name + ", products = " + products +
                 " }";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ecommerce ecommerce = (Ecommerce) o;
+        return name.equals(ecommerce.name) &&
+                products.equals(ecommerce.products) &&
+                Objects.equals(orders, ecommerce.orders);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, products, orders);
     }
 }

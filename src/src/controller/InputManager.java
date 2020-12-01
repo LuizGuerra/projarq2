@@ -4,7 +4,9 @@ import src.model.User;
 
 import java.io.Console;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputManager {
 
@@ -12,6 +14,26 @@ public class InputManager {
 
     public static int decisionBranch() {
         return scanner.nextInt();
+    }
+
+    public static List<String> arrayAsStrings(List<Object> objects) {
+        return objects.stream().map(Object::toString).collect(Collectors.toList());
+    }
+
+    static int selectFromList(String message, List<String> list) {
+        System.out.println(message);
+        int input = 0;
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(i+1 + ". " + list.get(i));
+        }
+        System.out.println(list.size() + 1 + ". Exit");
+        while(input < 1 || input > list.size() + 1) {
+            input = decisionBranch();
+            if (input < 1 || input > list.size() + 1) {
+                System.out.println("Please, inform a valid number");
+            }
+        }
+        return input == list.size() + 1 ? 0 : input;
     }
 
     public static User connectToEcommerce() {

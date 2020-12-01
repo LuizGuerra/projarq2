@@ -3,7 +3,14 @@ package src.view;
 import src.model.ConnectionStatus;
 
 import java.util.Arrays;
-import java.util.List;
+
+/*  gerar relatório de compras
+    > todos
+    > por ecommerce
+    > por data
+    > por agilidade de entrega -> 10 dias
+    > por cumprimento de prazo
+* */
 
 public class View {
 
@@ -12,11 +19,13 @@ public class View {
     public void loadOptions() {
         System.out.println("\nType the number of what you want to do");
         System.out.println("1: Connect to an e-commerce");
-        System.out.println("2: Update e-commerce orders");
-        System.out.println("3: Check orders by e-commerce");
-        System.out.println("4. Generate report");
-        System.out.println("5. Check all connected e-commerces");
-        System.out.println("6. Exit");
+        System.out.println("2: Remove an connected e-commerce");
+        System.out.println("3. Check all connected e-commerces");
+        System.out.println("4: Update e-commerce orders");
+        System.out.println("5: Check orders by e-commerce");
+        System.out.println("6. Check all orders");
+        System.out.println(". Generate report");
+        System.out.println(". Exit");
     }
 
     public void ecommerceConnection(String ecommerce, ConnectionStatus connectionStatus) {
