@@ -6,9 +6,6 @@ import src.model.Ecommerce;
 import src.model.User;
 import src.utility.ShoppingCartSingleton;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Facade {
 
     private EcommercesFacade ecommercesFacade;

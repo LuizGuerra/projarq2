@@ -4,9 +4,7 @@ import src.model.Ecommerce;
 import src.model.Item;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 final public class ShoppingCartSingleton {
 
