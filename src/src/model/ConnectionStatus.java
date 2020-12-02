@@ -1,7 +1,7 @@
 package src.model;
 
 public enum ConnectionStatus {
-    successful, badLogin, badPassword, badName;
+    successful, badLogin, badPassword, badName, alreadyConnected;
 
     public String toMessage(String withEcommerceName) {
         return switch (this) {
@@ -9,6 +9,7 @@ public enum ConnectionStatus {
             case badLogin -> "Incorrect login for " + withEcommerceName + "\n";
             case badPassword -> "Incorrect password for " + withEcommerceName + "\n";
             case badName -> "No ecommerce found with name " + withEcommerceName + "\n";
+            case alreadyConnected -> "Already connected to " + withEcommerceName + ".\n";
         };
     }
 }

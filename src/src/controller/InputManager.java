@@ -20,7 +20,7 @@ public class InputManager {
         return objects.stream().map(Object::toString).collect(Collectors.toList());
     }
 
-    static int selectFromList(String message, List<String> list) {
+    public static String selectFromList(String message, List<String> list) {
         System.out.println(message);
         int input = 0;
         for (int i = 0; i < list.size(); i++) {
@@ -33,7 +33,7 @@ public class InputManager {
                 System.out.println("Please, inform a valid number");
             }
         }
-        return input == list.size() + 1 ? 0 : input;
+        return input == list.size() + 1 ? null : list.get(input-1);
     }
 
     public static User connectToEcommerce() {
