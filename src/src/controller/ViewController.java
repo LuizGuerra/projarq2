@@ -1,13 +1,16 @@
 package src.controller;
 
 import src.facade.Facade;
+import src.utility.ShoppingCartObserver;
+import src.utility.ShoppingCartSingleton;
 
-public class ViewController {
+public class ViewController implements ShoppingCartObserver {
     private final Facade facade;
 
     public ViewController() {
         facade = new Facade();
         facade.updateEcommerces();
+        ShoppingCartSingleton.synchronised().addObserver(this);
     }
 
     public void start() {
@@ -30,4 +33,8 @@ public class ViewController {
         facade.print("Process exited.");
     }
 
+    @Override
+    public void update() {
+        facade.print("ShoppingCart updated!");
+    }
 }

@@ -87,9 +87,7 @@ public class Ecommerce {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ecommerce ecommerce = (Ecommerce) o;
-        return name.equals(ecommerce.name) &&
-                products.equals(ecommerce.products) &&
-                Objects.equals(orders, ecommerce.orders);
+        return name.equals(ecommerce.name);
     }
 
     @Override

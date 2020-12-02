@@ -3,12 +3,15 @@ package src.utility;
 import src.model.Ecommerce;
 import src.model.Item;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 
 final public class ShoppingCartSingleton {
 
     private Map<Item, Integer> items;
+    public ArrayList<ShoppingCartObserver> obs = new ArrayList<>();
 
     private static ShoppingCartSingleton shared;
 
@@ -29,14 +32,32 @@ final public class ShoppingCartSingleton {
         } else {
             items.put(item, amount);
         }
+        notificarObserver();
+    }
+
+    public void addObserver(ShoppingCartObserver o) {
+        if (!obs.contains(o)) {
+            obs.add(o);
+        }
+    }
+
+    public void removeObserver(ShoppingCartObserver o) {
+        obs.remove(o);
     }
 
     public Boolean remove(Item item) {
+        notificarObserver();
         return items.remove(item) != null;
     }
 
+    public void notificarObserver() {
+        for (ShoppingCartObserver o : obs) {
+            o.update();
+        }
+    }
+
     public void addFrom(Ecommerce ecommerce) {
-        System.out.println("Adding items from " + ecommerce.getName());
+        System.out.println("Loading items from " + ecommerce.getName());
         Map<String, Integer> map = ecommerce.getOrders();
         int counter = 0;
         for (String item : map.keySet()) {
@@ -48,11 +69,13 @@ final public class ShoppingCartSingleton {
                 System.out.println("Failed to add " + item + ".");
             } else {
                 counter++;
-                System.out.println("Adding product named " + item + ".");
+                System.out.println("Load " + item + ".");
                 items.put(product, map.get(item));
             }
         }
-        System.out.println("Added a total of " + counter + " items.");
+        if (counter > 0 && !items.isEmpty()) {
+            notificarObserver();
+        }
     }
 
     public void removeFrom(Ecommerce ecommerce) {

@@ -66,14 +66,7 @@ public class Facade {
     }
 
     public void updateEcommerceInformation() {
-//        print("Select a ecommerce to update:");
-//        AtomicInteger aux = new AtomicInteger(1);
-//        view.printArray(connections.stream().map(a -> "" + (aux.getAndIncrement()) + ". " + a.ecommerce).toArray());
-//        System.out.println(aux + ". Exit");
-//        int flag = InputManager.decisionBranch();
-        print("Updating ecommerce information...");
         updateEcommerces();
-        print("Update completed.");
         ecommercesFacade.getEcommerces().forEach(ShoppingCartSingleton.synchronised()::addFrom);
     }
 
