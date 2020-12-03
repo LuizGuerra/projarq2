@@ -103,11 +103,35 @@ public class Facade {
         ecommercesFacade.update(networkFacade.fetchEcommerces());
     }
 
-    public void addProduct(Item product){
-        ecommercesFacade.addProduct(product);
+    public void addProduct(){
+        if (ecommercesFacade.getEcommerces().isEmpty()) {
+            print("No connected store yet!");
+            return;
+        }
+        String selected = InputManager.selectFromList(
+                "Select a ecommerce to add a product:",
+                ecommercesFacade.ecommercesNamesList()
+        );
+        if (selected == null) { return; }
+        Ecommerce e = ecommercesFacade.fromString(selected);
+        if (e == null) { return; }
+
+        Item product = InputManager.addProduct();
+        ecommercesFacade.addProduct(product , e);
     }
 
     public void removeProduct(){
+        if (ecommercesFacade.getEcommerces().isEmpty()) {
+            print("No connected store yet!");
+            return;
+        }
+        String selected = InputManager.selectFromList(
+                "Select a ecommerce to remove a product:",
+                ecommercesFacade.ecommercesNamesList()
+        );
+        if (selected == null) { return; }
+        Ecommerce e = ecommercesFacade.fromString(selected);
+
         String productName = InputManager.selectFromList(
                 "Select product to be removed:",
                 ecommercesFacade.itemsNamesList()
@@ -116,7 +140,7 @@ public class Facade {
             print("Exiting");
             return;
         }
-        ecommercesFacade.removeProduct(productName);
+        ecommercesFacade.removeProduct(productName, e);
     }
 
     public void print(String message) {

@@ -100,12 +100,14 @@ public class EcommercesFacade {
         return ecommerces;
     }
 
-    public void addProduct(Item product) {
+    public void addProduct(Item product, Ecommerce ecommerce) {
         ShoppingCartSingleton.synchronised().addItem(product, product.getQuantity());
+        //TODO -> Add product in ecommerce
     }
 
-    public void removeProduct(String productName){
+    public void removeProduct(String productName, Ecommerce ecommerce){
         ShoppingCartSingleton.synchronised().removeItemFromName(productName);
+        //TODO -> Remove product in ecommerce
     }
 
     public Set<User> getConnections() {
