@@ -3,6 +3,7 @@ package src.facade;
 import src.controller.InputManager;
 import src.model.ConnectionStatus;
 import src.model.Ecommerce;
+import src.model.Item;
 import src.model.User;
 import src.utility.ShoppingCartSingleton;
 
@@ -100,6 +101,22 @@ public class Facade {
 
     public void updateEcommerces() {
         ecommercesFacade.update(networkFacade.fetchEcommerces());
+    }
+
+    public void addProduct(Item product){
+        ecommercesFacade.addProduct(product);
+    }
+
+    public void removeProduct(){
+        String productName = InputManager.selectFromList(
+                "Select product to be removed:",
+                ecommercesFacade.itemsNamesList()
+        );
+        if (productName == null) {
+            print("Exiting");
+            return;
+        }
+        ecommercesFacade.removeProduct(productName);
     }
 
     public void print(String message) {

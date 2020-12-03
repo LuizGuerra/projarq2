@@ -7,11 +7,19 @@ public class Item {
     private final UUID uuid;
     private final String name;
     private final float price;
+    private int quantity;
 
     public Item(String name, float price) {
         this.uuid = UUID.randomUUID();
         this.name = name;
         this.price = price;
+    }
+
+    public Item(String name, float price, int quantity) {
+        this.uuid = UUID.randomUUID();
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     public String getUUID() {
@@ -25,6 +33,8 @@ public class Item {
     public float getPrice() {
         return price;
     }
+
+    public int getQuantity() {return quantity;}
 
     public static Item transform(String itemString) {
         String [] str = itemString.split(":");

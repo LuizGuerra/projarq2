@@ -1,10 +1,13 @@
 package src.facade;
 
 import src.model.Ecommerce;
+import src.model.Item;
 import src.model.User;
+import src.utility.ShoppingCartSingleton;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -89,8 +92,20 @@ public class EcommercesFacade {
         return ecommerces.stream().map(Ecommerce::getName).collect(Collectors.toList());
     }
 
+    public List<String> itemsNamesList() {
+        return ShoppingCartSingleton.synchronised().getItems().keySet().stream().map(Item::getName).collect(Collectors.toList());
+    }
+
     public Set<Ecommerce> getEcommerces() {
         return ecommerces;
+    }
+
+    public void addProduct(Item product) {
+        ShoppingCartSingleton.synchronised().addItem(product, product.getQuantity());
+    }
+
+    public void removeProduct(String productName){
+        ShoppingCartSingleton.synchronised().removeItemFromName(productName);
     }
 
     public Set<User> getConnections() {

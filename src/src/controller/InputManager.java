@@ -1,6 +1,8 @@
 package src.controller;
 
+import src.model.Item;
 import src.model.User;
+import src.utility.ShoppingCartSingleton;
 
 import java.io.Console;
 import java.util.Arrays;
@@ -51,6 +53,16 @@ public class InputManager {
         return (new User(ecommerce, userName, password));
     }
 
+    public static Item addProduct() {
+        System.out.println("Type the product name:");
+        String productName = scanner.next();
 
+        System.out.println("Type the product price:");
+        float productPrice = scanner.nextFloat();
 
+        System.out.println("Type the product quantity:");
+        int quantity = scanner.nextInt();
+
+        return (new Item(productName, productPrice, quantity));
+    }
 }

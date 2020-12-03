@@ -24,6 +24,8 @@ public class View {
         System.out.println("4: Update e-commerce orders");
         System.out.println("5: Check orders by e-commerce");
         System.out.println("6. Check all orders");
+        System.out.println("7. Add product to Shopping Cart");
+        System.out.println("8. Remove product from Shopping Cart");
         System.out.println(". Generate report");
         System.out.println(". Exit");
     }

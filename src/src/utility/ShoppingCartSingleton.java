@@ -5,6 +5,7 @@ import src.model.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 
@@ -90,6 +91,17 @@ final public class ShoppingCartSingleton {
 
     public boolean removeItem(Item item) {
         return items.remove(item) != null;
+    }
+
+    public void removeItemFromName(String itemName) {
+        Iterator<Item> iter = items.keySet().iterator();
+        while (iter.hasNext()) {
+            Item p = iter.next();
+            if (p.getName().equals(itemName)) {
+                iter.remove();
+                notificarObserver();
+            }
+        }
     }
 
     public float total() {

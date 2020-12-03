@@ -26,6 +26,8 @@ public class ViewController implements ShoppingCartObserver {
                 case 4: facade.updateEcommerceInformation(); break;
                 case 5: facade.checkOrdersByEcommerce(); break;
                 case 6: facade.showAllOrders(); break;
+                case 7: facade.addProduct(InputManager.addProduct()); break;
+                case 8: facade.removeProduct(); break;
                 case 10: facade.print("Exiting..."); break;
                 default: facade.print("Default reached.");
             }

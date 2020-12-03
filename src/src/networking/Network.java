@@ -13,11 +13,11 @@ import java.util.stream.Stream;
 public class Network {
 
     public static List<Ecommerce> fetchEcommerces() {
-        return ecommercesFrom(readFile("C:\\Users\\Fuerras\\Desktop\\ProjArq\\Trab\\src\\src\\networking\\MockedEcommercesData.csv"));
+        return ecommercesFrom(readFile("/Users/vitordemenighi/Desktop/projarq2/src/src/networking/MockedEcommercesData.csv"));
     }
 
     public static List<User> fetchUsers() {
-        return usersFrom(readFile("C:\\Users\\Fuerras\\Desktop\\ProjArq\\Trab\\src\\src\\networking\\MockedUsersData.csv"));
+        return usersFrom(readFile("/Users/vitordemenighi/Desktop/projarq2/src/src/networking/MockedUsersData.csv"));
     }
 
     public static ConnectionStatus tryLogIn(User user) {
