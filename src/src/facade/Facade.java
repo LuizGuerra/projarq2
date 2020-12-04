@@ -26,6 +26,7 @@ public class Facade {
     public void connectToEcommerce(User user) {
         if (ecommercesFacade.asAny(user)) {
             print("Already connected to this ecommerce");
+            return;
         }
         ConnectionStatus status = networkFacade.tryLogIn(user);
         viewFacade.ecommerceConnection(user.ecommerce, status);
