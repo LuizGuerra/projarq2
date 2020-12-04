@@ -7,16 +7,20 @@ import src.model.Item;
 import src.model.User;
 import src.utility.ShoppingCartSingleton;
 
+import java.util.ArrayList;
+
 public class Facade {
 
     private EcommercesFacade ecommercesFacade;
     private ViewFacade viewFacade;
     private NetworkFacade networkFacade;
+    private ReportFacade reportFacade;
 
     public Facade() {
         networkFacade = new NetworkFacade();
         ecommercesFacade = new EcommercesFacade();
         viewFacade = new ViewFacade();
+        reportFacade = new ReportFacade();
     }
 
     public void loadOptions() {
@@ -142,6 +146,35 @@ public class Facade {
             return;
         }
         ecommercesFacade.removeProduct(productName, e);
+    }
+
+    public void report() {
+        System.out.println("Select what report you would like");
+        System.out.println("1. Show all orders");
+        System.out.println("2. Filter by store");
+        System.out.println("3. Filter by agility");
+        System.out.println("4. Filter by orders delivered on time");
+        System.out.println("5. Exit");
+        int input = 0;
+        while (input < 1 || input > 5) {
+            input = InputManager.decisionBranch();
+            if (input < 1 || input > 5) {
+                System.out.println("Please inform a valid number.");
+            }
+        }
+        if (input == 5) {
+            return;
+        }
+        if (input == 1) {
+            viewFacade.print(ShoppingCartSingleton.synchronised().asArray());
+        } else if (input == 2) {
+            System.out.println("Inform the store name: ");
+            String str = InputManager.next();
+            viewFacade.print(reportFacade.filterByStore(
+                    InputManager.next(),
+                    new ArrayList(ecommercesFacade.getEcommerces())
+            ).toArray());
+        }
     }
 
     public void print(String message) {

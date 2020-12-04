@@ -18,6 +18,10 @@ public class InputManager {
         return scanner.nextInt();
     }
 
+    public static String next() {
+        return scanner.next();
+    }
+
     public static List<String> arrayAsStrings(List<Object> objects) {
         return objects.stream().map(Object::toString).collect(Collectors.toList());
     }

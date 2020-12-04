@@ -7,23 +7,44 @@ public class Ecommerce {
     private final String name;
     private List<Item> products;
     private Map<String,Integer> orders;
+    private List <Order> packages;
 
     public Ecommerce(String url) {
         this.name = url;
         this.products = new ArrayList<>();
         this.orders = new HashMap<>();
+        this.packages = new ArrayList<>();
     }
 
     public Ecommerce(String url, List<Item> items) {
         this.name = url;
         this.products = items;
         this.orders = new HashMap<>();
+        this.packages = new ArrayList<>();
     }
 
     public Ecommerce(String name, List<Item> products, Map<String, Integer> orders) {
         this.name = name;
         this.products = products;
         this.orders = orders;
+        this.packages = new ArrayList<>();
+    }
+
+    public void updatePackagesArray() {
+        Random r = new Random();
+        packages = orders.keySet().stream()
+                .map( k -> new Order(getName(), OrderStatus.payed,
+                        asItem(k), orders.get(k), new Date(2020, 12, 10) ))
+                .collect(Collectors.toList());
+        if (packages.size() > 1) {
+            for (int i = 0; i < packages.size()-1; i++) {
+                Order o = packages.get(i);
+                o.setStatus(OrderStatus.delivered);
+                o.setDelivered(new Date(2020, 12, 7));
+                o.setPaymentDay(new Date(2020, 12, 1));
+                o.setOutForDelivery(new Date(2020, 12, 6));
+            }
+        }
     }
 
     public Item asItem(String item) {
